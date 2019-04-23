@@ -1,0 +1,193 @@
+<div class="row">
+    <div class="col-md-4 animated fadeIn">
+        <div class="card card-block tip-card">
+          <div class="tip-msg">
+          <!-- <h3>First Post for test</h3> -->
+            <span style=color:brown [innerHTML]='posts[5].title.rendered'></span>
+            <!-- <span [innerHTML]='posts[6].content.rendered'></span> -->
+            <p style=color:dodgerblue > {{nposts[5]}} </p>
+          </div>
+          <button class="tip-ico tip-ico-primary"  (click)= 'clearcomments()' (click)="postdetail(posts[5].id)">
+            <i class="fa fa-group fa-fw"></i>
+          </button>
+        </div>
+      </div>
+
+  <div class="col-md-4 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <!-- <h3>First Message</h3> -->
+         <span style=color:brown [innerHTML]='posts[1].title.rendered'></span>
+        <!--  <span [innerHTML]='posts[7].content.rendered'></span> -->
+        <p style=color:dodgerblue >{{nposts[1]}}</p>
+        <!-- <p> {{nposts[1]}} </p> -->
+      </div>
+      <button class="tip-ico tip-ico-info" (click)= 'clearcomments()' (click)="postdetail(posts[1].id)">
+        <i class="fa fa-comments fa-fw"></i>
+      </button>
+    </div>
+  </div>
+   <div class="col-md-4 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <span style=color:brown [innerHTML]='posts[2].title.rendered'></span>
+        <p style=color:dodgerblue > {{nposts[2]}} </p>
+      </div>
+      <button class="tip-ico tip-ico-info" (click)= 'clearcomments()' (click)="postdetail(posts[2].id)">
+        <i class="fa fa-comments fa-fw"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+    <div class="col-md-4 animated fadeIn">
+      <div class="card card-block tip-card">
+        <div class="tip-msg">
+          <!-- <h3>First Message</h3> -->
+           <span style=color:brown [innerHTML]='posts[4].title.rendered'></span>
+           <p style=color:dodgerblue > {{nposts[4]}} </p>
+        </div>
+        <button class="tip-ico tip-ico-info" (click)= 'clearcomments()' (click)="postdetail(posts[7].id)">
+          <i class="fa fa-comments fa-fw"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-4 animated fadeIn">
+        <div class="card card-block tip-card">
+          <div class="tip-msg">
+            <!-- <h3>First Post</h3> -->
+            <span style=color:brown [innerHTML]='posts[0].title.rendered'></span>
+            <!-- <span [innerHTML]='posts[7].content.rendered'></span> -->
+            <p style=color:dodgerblue > {{nposts[0]}} </p>
+          </div>
+          <button class="tip-ico tip-ico-primary" (click)= 'clearcomments()' (click)="postdetail(posts[0].id)">
+            <i class="fa fa-group f-fw"></i>
+          </button>
+        </div>
+      </div>
+
+
+  <div class="col-md-4 animated fadeIn">
+    <div class="card card-block tip-card">
+      <div class="tip-msg">
+        <!-- <h3>First Post</h3> -->
+
+        <span  style=color:brown   [innerHTML]='posts[6].title.rendered'></span>
+       <!--  <span [innerHTML]='posts[6].content.rendered'></span> -->
+       <p style=color:dodgerblue > {{nposts[6]}} </p>
+      </div>
+      <button class="tip-ico tip-ico-primary" (click)= 'clearcomments()' (click)="postdetail(posts[6].id)" >
+        <i class="fas fa-dove"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <!-- Display post div -->
+  <div class="col-md-8">
+
+      <div class="card card-block tip-card">
+
+         <div class="form-group">
+           <div class="row">
+              <div class="text-right">
+                <button type="submit" class="btn btn-success"   (click)= "openModal(AddComment)" >Add Comment</button>
+              </div>
+             <div [ngStyle]="{'font-size.px':15}">
+             <p style=color:brown [innerHTML]='firstpost.title.rendered' ></p>
+            </div>
+           </div>
+            <div [ngStyle]="{'font-size.px':15}">
+              <p  style=color:steelblue  [innerHTML]='firstpost.content.rendered' ></p>
+
+            </div>
+          </div>
+
+
+      </div>
+      </div>
+<!-- Display comment div -->
+
+    <div  class="col-md-4">
+    <card cardTitle="Comments" isCollapse="true">
+
+
+        <div   *ngFor='let comts of comments let i = index'>
+            <div id="MyDiv" >
+
+
+         <div >
+          <p  [innerHTML]='comts.content.rendered' ></p>
+         </div>
+
+         <div>
+            <div>
+            <p  [innerHTML]='comts.author_name' ></p>
+          </div>
+          <div class="text-right">
+            <button class="btn btn-primary"  (click)= "openModal()" (click)= "valuechg(i)" >Read Full</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </card>
+    </div>
+
+
+</div>
+
+<div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+       <!--  <h4 class="modal-title">{{modalcnt.author_name}}</h4> -->
+      </div>
+      <div  class="modal-body">
+         <div *ngIf = "iscmnt">
+         <!--  <p [innerHTML]='modalcnt.content.rendered'></p> -->
+            <span>{{tmpcomment}}</span>
+         </div>
+          <!-- <div *ngIf = "!iscmnt">
+
+            <textarea class="form-control" id="comment" required [(ngModel)]='tempcontent' ></textarea>
+            <button type="submit" class="btn btn-success"(click)= "savecomment(tempcontent)"  >Save</button>
+           </div> -->
+           </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal !-->
+
+<div id="AddComment" class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display}">
+
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Type Your Comment Here</h4>
+        </div>
+        <div  class="modal-body">
+
+             <div *ngIf = "!iscmnt">
+
+              <textarea class="form-control" id="comment" required [(ngModel)]='tempcontent' ></textarea>
+              <button type="submit" class="btn btn-success"(click)= "savecomment(tempcontent)"  >Save</button>
+             </div>
+             </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal !-->
+
+
+

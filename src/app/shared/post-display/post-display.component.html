@@ -1,0 +1,27 @@
+<div *ngIf='!DashboardPage'>
+<div class="row">
+      <div class="form-group">
+        <label >Post title</label>
+        <div  [innerHTML]='firstpost.title.rendered' ></div>
+      </div>
+
+      <div class="form-group">
+        <label >Post content</label>
+        <p  [innerHTML]='firstpost.content.rendered' ></p>
+
+        <div *ngFor='let comts of comments'>
+        <p  [innerHTML]='comts.content.rendered' ></p>
+      </div>
+      <div class="row">
+      <button type="submit" class="btn btn-success"(click)=Back()>Go Back</button>
+      <button type="submit" class="btn btn-success"(click)=addcomment()>Add Comment</button>
+    </div>
+      </div>
+      <div *ngIf = "comn">
+          <textarea class="form-control" id="comment" required [(ngModel)]='tempcontent' name='content'></textarea>
+          <button type="submit" class="btn btn-success"(click)=savecomment(tempcontent)>Save</button>
+      </div>
+
+  </div>
+ </div>
+
